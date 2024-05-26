@@ -1,5 +1,9 @@
 from app.core.models import Ingredient, User
-from app.ingredients.exceptions import IngredientNotFound, IngredientNotOwned, IngredientAlreadyExists
+from app.ingredients.exceptions import (
+    IngredientNotFound,
+    IngredientNotOwned,
+    IngredientAlreadyExists,
+)
 from app.ingredients.schemas import UpdateIngredientScheme
 
 
@@ -31,8 +35,10 @@ class IngredientService:
         Creates and returns ingredient
         """
         if await self.ingredient_exists(user, title):
-            raise IngredientAlreadyExists(msg=f"User already has ingredient with title [{title}]")
-                
+            raise IngredientAlreadyExists(
+                msg=f"User already has ingredient with title [{title}]"
+            )
+
         ingredient = await Ingredient.create(
             owner=user,
             title=title,
@@ -70,15 +76,21 @@ class IngredientService:
 
         if ingredient is None:
             raise IngredientNotFound()
-        
+
         if ingredient.owner_id != user.id:  # type: ignore
             raise IngredientNotOwned()
-        
+
         updated_data = data_scheme.model_dump(exclude={"id"}, exclude_none=True)
         updated_title = data_scheme.title
-        
-        if updated_title is not None and ingredient.title != updated_title and await self.ingredient_exists(user, updated_title):
-            raise IngredientAlreadyExists(msg=f"User already has ingredient with title [{updated_title}]") 
+
+        if (
+            updated_title is not None
+            and ingredient.title != updated_title
+            and await self.ingredient_exists(user, updated_title)
+        ):
+            raise IngredientAlreadyExists(
+                msg=f"User already has ingredient with title [{updated_title}]"
+            )
 
         ingredient = await ingredient.update_from_dict(
             data_scheme.model_dump(exclude={"ingredient_id"}, exclude_none=True)

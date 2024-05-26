@@ -3,7 +3,12 @@ from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 
 from app.auth.service import AuthService
-from app.auth.schemas import LoginScheme, TokenScheme, RegisterScheme, RegisteredUserScheme
+from app.auth.schemas import (
+    LoginScheme,
+    TokenScheme,
+    RegisterScheme,
+    RegisteredUserScheme,
+)
 from app.auth.dependencies import get_current_user
 from app.core.models import User
 from app.generic.schemas import GenericResponse
@@ -40,4 +45,6 @@ async def register(
     """
     Regiser user account
     """
-    return await AuthService().register_user(schema.username, schema.password, schema.email)
+    return await AuthService().register_user(
+        schema.username, schema.password, schema.email
+    )

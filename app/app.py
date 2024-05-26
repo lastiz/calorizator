@@ -13,6 +13,7 @@ from app.core.exceptions import BaseAppError, app_error_handler
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     from tortoise import Tortoise
+
     await Tortoise.generate_schemas(safe=True)
     yield
 

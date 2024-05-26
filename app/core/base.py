@@ -13,16 +13,15 @@ class BaseAppError(Exception, ABC):
     msg: str = "Generic Error"
 
     def __init__(self, msg: str | None = None, fields: list[str] | None = None) -> None:
-        
         if self.status_code is None:
             raise AttributeError("Must define class attribute status_code")
-        
+
         if msg is not None:
             self.msg = msg
-        
+
         if fields is not None:
             self.fields = fields
-        
+
         super().__init__()
 
     def __str__(self) -> str:
@@ -40,6 +39,6 @@ class BaseAppError(Exception, ABC):
             },
         }
         return JSONResponse(
-            status_code=self.status_code, # type: ignore
+            status_code=self.status_code,  # type: ignore
             content=content,
         )

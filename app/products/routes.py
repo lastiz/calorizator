@@ -2,7 +2,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Query
 
-from app.products.schemas import ProductScheme, AddProductScheme, DeleteProductScheme, UpdateProductScheme
+from app.products.schemas import (
+    ProductScheme,
+    AddProductScheme,
+    DeleteProductScheme,
+    UpdateProductScheme,
+)
 from app.auth.dependencies import get_current_user, User
 from app.products.dependencies import get_product_service, ProductService
 
@@ -14,10 +19,12 @@ router = APIRouter(prefix="/products", tags=["Products operations"])
 async def get_products(
     user: Annotated[User, Depends(get_current_user)],
     product_service: Annotated[ProductService, Depends(get_product_service)],
-    product_title: Annotated[str | None, Query(max_length=320, description="Product title")] = None,
+    product_title: Annotated[
+        str | None, Query(max_length=320, description="Product title")
+    ] = None,
 ):
     """
-    Get user products with title like %product_title% 
+    Get user products with title like %product_title%
     """
     return await product_service.get(user, product_title)
 
