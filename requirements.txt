@@ -1,0 +1,4 @@
+fastapi==0.111.0
+pydantic-settings==2.2.1
+tortoise-orm[asyncpg]==0.21.2
+pygit2==1.14.1
