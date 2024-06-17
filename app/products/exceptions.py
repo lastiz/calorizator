@@ -19,7 +19,7 @@ class ProductNotOwned(BaseAppError):
     """
 
     status_code = status.HTTP_403_FORBIDDEN
-    msg = "User is not the owner of ingredient"
+    msg = "User is not the owner of product"
     fields = ["id"]
 
 

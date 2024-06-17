@@ -8,7 +8,7 @@ from app.auth.exceptions import NotAuthenticatedError
 
 
 async def get_current_user(
-    token: Annotated[str, Depends(APIKeyHeader(name="A-Auth", auto_error=False))]
+    token: Annotated[str, Depends(APIKeyHeader(name="X-Auth", auto_error=False))]
 ) -> User:
     """
     Authenticates user by token

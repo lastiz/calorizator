@@ -24,12 +24,6 @@ class ProductScheme(BaseModel):
     )
 
 
-class ProductWithIngredientsScheme(BaseModel):
-    id: int = Field(ge=1, description="Product ID")
-    title: str = Field(min_length=3, max_length=320, description="Product Title")
-    # ingredients: list[ProductIngredientScheme] = Field(description="Product ingredients")
-
-
 class AddProductScheme(BaseModel):
     """
     Request to add product scheme

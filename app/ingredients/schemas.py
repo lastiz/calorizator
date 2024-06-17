@@ -12,6 +12,7 @@ class IngredientScheme(BaseModel):
     carbohydrates: int = Field(ge=0, description="Carbohydrates per 100 grams")
     fats: int = Field(ge=0, description="Fats per 100 grams")
     calories: int = Field(ge=0, description="Calories per 100 grams")
+    img_url: str | None = Field(description="Image url", alias="imgUrl", validation_alias="img_url")
 
 
 class AddIngredientScheme(BaseModel):
@@ -24,6 +25,7 @@ class AddIngredientScheme(BaseModel):
     carbohydrates: int = Field(ge=0, description="Carbohydrates per 100 grams")
     fats: int = Field(ge=0, description="Fats per 100 grams")
     calories: int = Field(ge=0, description="Calories per 100 grams")
+    img_url: str | None = Field(description="Image url", alias="imgUrl", validation_alias="imgUrl")
 
 
 class DeleteIngredientScheme(BaseModel):
@@ -47,3 +49,4 @@ class UpdateIngredientScheme(BaseModel):
     carbohydrates: int | None = Field(ge=0, description="Carbohydrates per 100 grams")
     fats: int | None = Field(ge=0, description="Fats per 100 grams")
     calories: int | None = Field(ge=0, description="Calories per 100 grams")
+    img_url: str | None = Field(description="Image url", alias="imgUrl", validation_alias="img_url")

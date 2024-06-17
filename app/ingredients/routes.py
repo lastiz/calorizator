@@ -40,7 +40,7 @@ async def create_ingredients(
     return await ingredient_service.create(user, **scheme.model_dump())
 
 
-@router.delete("", response_model=int)
+@router.delete("", response_model=DeleteIngredientScheme)
 async def delete_ingredient(
     user: Annotated[User, Depends(get_current_user)],
     ingredient_service: Annotated[IngredientService, Depends(get_ingredients_service)],

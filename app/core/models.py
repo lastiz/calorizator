@@ -42,11 +42,11 @@ class Ingredient(Model, TimeMixin):
     carbohydrates = fields.IntField(default=0)
     fats = fields.IntField(default=0)
     calories = fields.IntField(default=0)
+    img_url = fields.CharField(max_length=1024, null=True)
 
     owner = fields.ForeignKeyField(
         "models.User", related_name="ingredients", on_delete=OnDelete.CASCADE
     )
-    # products = fields.ManyToManyField("models.Product", through="product_ingredient")
 
     class Meta:
         table = "ingredients"
@@ -64,7 +64,6 @@ class Product(Model, TimeMixin):
     owner = fields.ForeignKeyField(
         "models.User", related_name="products", on_delete=OnDelete.CASCADE
     )
-    # ingredients = fields.ManyToManyField("models.Ingredient", through="product_ingredient")
 
     class Meta:
         table = "products"

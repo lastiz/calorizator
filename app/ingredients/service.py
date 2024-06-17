@@ -30,6 +30,7 @@ class IngredientService:
         carbohydrates: int,
         fats: int,
         calories: int,
+        img_url: str,
     ) -> Ingredient:
         """
         Creates and returns ingredient
@@ -46,10 +47,11 @@ class IngredientService:
             carbohydrates=carbohydrates,
             fats=fats,
             calories=calories,
+            img_url=img_url,
         )
         return ingredient
 
-    async def delete(self, user: User, ingredient_id: int) -> int:
+    async def delete(self, user: User, ingredient_id: int) -> dict:
         """
         Deletes user ingredient
         """
@@ -62,7 +64,7 @@ class IngredientService:
             raise IngredientNotOwned()
 
         await ingredient.delete()
-        return ingredient.id
+        return {"id": ingredient.id}
 
     async def update(
         self,
